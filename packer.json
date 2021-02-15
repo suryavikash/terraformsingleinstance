@@ -19,20 +19,17 @@
       "source_ami": "{{user `source_ami`}}",
       "instance_type": "{{user `instance_type`}}",
       "ssh_username": "ubuntu",
-      "ami_name": "DevOpsClass-B15-Build-{{isotime | clean_resource_name}}",
+      "ami_name": "mybuild",
       "vpc_id": "{{user `vpc_id`}}",
-      "subnet_id": "{{user `subnet_id`}}",
-      "tags": {
-        "Name": "DevOpsClass-B15-Build-{{isotime | clean_resource_name}}"
-      }
+      "subnet_id": "{{user `subnet_id`}}"
     }],
     "provisioners": [{
       "type": "shell",
       "inline": [
         "sleep 30",
-        "sudo apt update -y",
-        "sudo apt install nginx -y",
-        "sudo apt install git -y",
+        "sudo apt-get update -y",
+        "sudo apt-get install nginx -y",
+        "sudo apt-get install git -y",
         "sudo git clone https://github.com/mavrick202/webhooktesting.git",
         "sudo rm -rf /var/www/html/index.nginx-debian.html",
         "sudo cp webhooktesting/index.html /var/www/html/index.nginx-debian.html",
